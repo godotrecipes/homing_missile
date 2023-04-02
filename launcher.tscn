@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://b61ul37bk74d0"]
+
+[ext_resource type="Texture2D" uid="uid://faco0qkqnwrb" path="res://assets/towerDefense_tilesheet.png" id="1_t2d4h"]
+[ext_resource type="Script" path="res://launcher.gd" id="1_wbynb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_itggd"]
+radius = 350.0
+
+[node name="Launcher" type="Area2D"]
+script = ExtResource("1_wbynb")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("1_t2d4h")
+region_enabled = true
+region_rect = Rect2(1280, 448, 64, 64)
+
+[node name="Turret" type="Node2D" parent="."]
+
+[node name="Turret" type="Sprite2D" parent="Turret"]
+rotation = 1.5708
+texture = ExtResource("1_t2d4h")
+offset = Vector2(2.08165e-12, -10)
+region_enabled = true
+region_rect = Rect2(1216, 640, 64, 64)
+
+[node name="Muzzle" type="Marker2D" parent="Turret"]
+position = Vector2(50, 2.08165e-12)
+
+[node name="Flash" type="Sprite2D" parent="Turret"]
+visible = false
+position = Vector2(55, 2.08165e-12)
+rotation = 1.5708
+texture = ExtResource("1_t2d4h")
+region_enabled = true
+region_rect = Rect2(1280, 768, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_itggd")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
